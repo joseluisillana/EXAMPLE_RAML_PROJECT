@@ -1,0 +1,354 @@
+#%RAML 1.0
+title: M.I.K.E API
+version: 1
+baseUri: /mikeAPI
+types:
+
+  MSG_IN:
+    description: ""
+    properties:
+      header: object
+      body: object
+    example:
+      header: {}
+      body: {}
+
+  MSG_OUT:
+    description: ""
+    properties:
+      header: object
+      body: object
+    example:
+      header: {}
+      body: {}
+
+  Health:
+    description: ""
+    properties:
+      timestamp: number
+      response_time: number
+      http_status_code: number
+      response_status: string
+      response_code: string
+    example:
+      timestamp: 1444389041012
+      response_time: 25001
+      http_status_code: 200
+      response_status: "OK"
+      response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+
+  Location:
+    description: ""
+    properties:
+      geolocation: GeoLocation
+      branch: Branch
+    example:
+      geolocation:
+        lat: "37.3591307"
+        lon: "-6.034502"
+      branch:
+        branch_id: "ES01820437"
+        branch_code: "0437"
+        operative_branch: "0883"
+        bank: "0182"
+        operative_bank: "0001"
+        branch_address:
+          province: 41
+          post_code: 28011
+          country: "SPAIN"
+        region: "territorial"
+        head_branch: "CBC"
+
+  BranchAddress:
+    description: ""
+    properties:
+      province: number
+      post_code: number
+      country: string
+    example:
+      province: 41
+      post_code: 28011
+      country: "SPAIN"
+
+  Branch:
+    description: ""
+    properties:
+      branch_id: string
+      branch_code: string
+      operative_branch: string
+      bank: string
+      operative_bank: string
+      branch_address: BranchAddress
+      region: string
+      head_branch: string
+    example:
+      branch_id: "ES01820437"
+      branch_code: "0437"
+      operative_branch: "0883"
+      bank: "0182"
+      operative_bank: "0001"
+      branch_address:
+        province: 41
+        post_code: 28011
+        country: "SPAIN"
+      region: "territorial"
+      head_branch: "CBC"
+
+  GeoLocation:
+    description: ""
+    properties:
+      lat: string
+      lon: string
+    example:
+      lat: "37.3591307"
+      lon: "-6.034502"
+
+  CMS:
+    description: ""
+    properties:
+      channel: number
+      medium: number
+      service: number
+    example:
+      channel: 6
+      medium: 19
+      service: 105
+
+  InboundCall:
+    description: ""
+    properties:
+      customer_id: string
+      user_id: string
+      process_type: string
+      process_id: string
+      session_id: string
+      user_action_id: string
+      call_id: string
+      aap: string
+      cms: CMS
+      user_agent: string
+      hostname: string
+      instance_name: string
+      caller_ip: string
+      location: Location
+      health: Health
+      msg_in: MSG_IN
+      msg_out: MSG_OUT
+      journal: object
+      additional_data: object
+    example:
+      customer_id: "ES0182099817252C"
+      user_id: "xe01379"
+      process_type: "id proceso contratación"
+      process_id: "id instancia única proceso de contratación"
+      session_id: " "
+      user_action_id: " "
+      call_id: " "
+      aap: "00000037"
+      cms:
+        channel: 6
+        medium: 19
+        service: 105
+      user_agent: "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405"
+      hostname: "spnac008"
+      instance_name: "01(clon)"
+      caller_ip: "192.168.1.123"
+      location:
+        geolocation:
+          lat: "37.3591307"
+          lon: "-6.034502"
+        branch:
+          branch_id: "ES01820437"
+          branch_code: "0437"
+          operative_branch: "0883"
+          bank: "0182"
+          operative_bank: "0001"
+          branch_address:
+            province: 41
+            post_code: 28011
+            country: "SPAIN"
+          region: "territorial"
+          head_branch: "CBC"
+      health:
+        timestamp: 1444389041012
+        response_time: 25001
+        http_status_code: 200
+        response_status: "OK"
+        response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+      msg_in:
+        header: {}
+        body: {}
+      msg_out:
+        header: {}
+        body: {}
+      journal: {}
+      additional_data: {}
+
+  InboundCallMinus:
+    description: ""
+    properties:
+      user_id: string
+      call_id: string
+      hostname: string
+      instance_name: string
+      health: Health
+    example:
+      user_id: " "
+      call_id: " "
+      hostname: " "
+      instance_name: " "
+      health:
+        timestamp: 1444389041012
+        response_time: 25001
+        http_status_code: 200
+        response_status: "OK"
+        response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+
+  OutboundCall:
+    description: ""
+    properties:
+      srv_href: string
+      srv_type: string
+      uuaa: string
+      inbound_call: InboundCallMinus
+    example:
+      srv_href: "http://ei-arqaso.igrupobbva:7050/customers/V01/123/"
+      srv_type: "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)"
+      uuaa: "ENAX, KJIM, QZQP, ATRP..."
+      inbound_call:
+        user_id: " "
+        call_id: " "
+        hostname: " "
+        instance_name: " "
+        health:
+          timestamp: 1444389041012
+          response_time: 25001
+          http_status_code: 200
+          response_status: "OK"
+          response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+  Log:
+    description: ""
+    properties:
+      srv_id: string
+      srv_href: string
+      srv_type: string
+      schema_version: string
+      uuaa: string
+      inbound_call: InboundCall
+      outbound_calls: OutboundCall[]
+    example:
+      srv_id: "SMC201500250"
+      srv_href: "http://ei-arqaso.igrupobbva:7050/customers/V01/123/"
+      srv_type: "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)"
+      schema_version: string
+      uuaa: "ENAX, KJIM, QZQP, ATRP..."
+      inbound_call:
+        customer_id: "ES0182099817252C"
+        user_id: "xe01379"
+        process_type: "id proceso contratación"
+        process_id: "id instancia única proceso de contratación"
+        session_id: " "
+        user_action_id: " "
+        call_id: " "
+        aap: "00000037"
+        cms:
+          channel: 6
+          medium: 19
+          service: 105
+        user_agent: "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405"
+        hostname: "spnac008"
+        instance_name: "01(clon)"
+        caller_ip: "192.168.1.123"
+        location:
+          geolocation:
+            lat: "37.3591307"
+            lon: "-6.034502"
+          branch:
+            branch_id: "ES01820437"
+            branch_code: "0437"
+            operative_branch: "0883"
+            bank: "0182"
+            operative_bank: "0001"
+            branch_address:
+              province: 41
+              post_code: 28011
+              country: "SPAIN"
+            region: "territorial"
+            head_branch: "CBC"
+        health:
+          timestamp: 1444389041012
+          response_time: 25001
+          http_status_code: 200
+          response_status: "OK"
+          response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+        msg_in:
+          header: {}
+          body: {}
+        msg_out:
+          header: {}
+          body: {}
+        journal: {}
+        additional_data: {}
+      outbound_calls:
+        srv_href: "http://ei-arqaso.igrupobbva:7050/customers/V01/123/"
+        srv_type: "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)"
+        uuaa: "ENAX, KJIM, QZQP, ATRP..."
+        inbound_call:
+          user_id: " "
+          call_id: " "
+          hostname: " "
+          instance_name: " "
+          health:
+            timestamp: 1444389041012
+            response_time: 25001
+            http_status_code: 200
+            response_status: "OK"
+            response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+
+resourceTypes:
+  Collection:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<item>>[]
+    post:
+      body:
+        application/json:
+          type: <<item>>
+
+  Member:
+    post:
+      body:
+        application/json:
+          type: <<item>>
+      responses:
+        200:
+
+traits:
+  FilterableBySrvId:
+    queryParameters:
+      srv_id?:
+        type: string
+  FilterableBySrvType:
+    queryParameters:
+      srv_type?:
+        type: string
+
+/insert:
+    type: { Member: {item : Log} }
+
+/getBySrvId:
+    type: { Collection: {item : Log} }
+    get:
+      is: FilterableBySrvId
+      queryParameters:
+        SrvId: string
+
+/getBySrvType:
+    type: { Collection: {item : Log} }
+    get:
+      is: FilterableBySrvType
+      queryParameters:
+        SrvId: string
