@@ -41,7 +41,7 @@ resourceTypes:
         application/json:
           type: <<item>>
 
-  Member:
+  Item:
     put:
       body:
         application/json:
@@ -66,18 +66,18 @@ traits:
       petKind:
        enum: [bird, mammal]
   /{id}:
-    type: { Member: {item : Pet} }
+    type: { Item: {item : Pet} }
 
 /birds:
   type: { Collection: {item: Bird} }
   get:
     is: FilterableByPrice
   /{id}:
-    type: { Member: {item : Bird} }
+    type: { Item: {item : Bird} }
 
 /mammals:
   type: { Collection: {item: Mammal} }
   get:
     is: FilterableByPrice
   /{id}:
-    type: { Member: {item : Mammal} }
+    type: { Item: {item : Mammal} }

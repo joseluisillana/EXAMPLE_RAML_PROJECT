@@ -1,11 +1,91 @@
 #%RAML 1.0
 title: M.I.K.E API
 version: 1
-baseUri: /mikeAPI
+baseUri: https://mike.igrupobbva.com/mike-consumer-api{version}/
+mediaType: application/json
 types:
 
-  MSG_IN:
+  Log:
     description: ""
+    properties:
+      srv_id: string
+      srv_href: string
+      srv_type: string
+      schema_version: string
+      uuaa: string
+      inbound_call: InboundCall
+      outbound_calls: OutboundCall[]
+    example:
+      srv_id: "SMC201500250"
+      srv_href: "http://ei-arqaso.igrupobbva:7050/customers/V01/123/"
+      srv_type: "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)"
+      schema_version: string
+      uuaa: "ENAX, KJIM, QZQP, ATRP..."
+      inbound_call:
+        customer_id: "ES0182099817252C"
+        user_id: "xe01379"
+        process_type: "id proceso contratación"
+        process_id: "id instancia única proceso de contratación"
+        session_id: " "
+        user_action_id: " "
+        call_id: " "
+        aap: "00000037"
+        cms:
+          channel: 6
+          medium: 19
+          service: 105
+        user_agent: "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405"
+        hostname: "spnac008"
+        instance_name: "01(clon)"
+        caller_ip: "192.168.1.123"
+        location:
+          geolocation:
+            lat: "37.3591307"
+            lon: "-6.034502"
+          branch:
+            branch_id: "ES01820437"
+            branch_code: "0437"
+            operative_branch: "0883"
+            bank: "0182"
+            operative_bank: "0001"
+            branch_address:
+              province: 41
+              post_code: 28011
+              country: "SPAIN"
+            region: "territorial"
+            head_branch: "CBC"
+        health:
+          timestamp: 1444389041012
+          response_time: 25001
+          http_status_code: 200
+          response_status: "OK"
+          response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+        msg_in:
+          header: {}
+          body: {}
+        msg_out:
+          header: {}
+          body: {}
+        journal: {}
+        additional_data: {}
+      outbound_calls:
+        srv_href: "http://ei-arqaso.igrupobbva:7050/customers/V01/123/"
+        srv_type: "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)"
+        uuaa: "ENAX, KJIM, QZQP, ATRP..."
+        inbound_call:
+          user_id: " "
+          call_id: " "
+          hostname: " "
+          instance_name: " "
+          health:
+            timestamp: 1444389041012
+            response_time: 25001
+            http_status_code: 200
+            response_status: "OK"
+            response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+
+  MSG_IN:
+    description: " asdasdasdasdasd "
     properties:
       header: object
       body: object
@@ -226,84 +306,6 @@ types:
           http_status_code: 200
           response_status: "OK"
           response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
-  Log:
-    description: ""
-    properties:
-      srv_id: string
-      srv_href: string
-      srv_type: string
-      schema_version: string
-      uuaa: string
-      inbound_call: InboundCall
-      outbound_calls: OutboundCall[]
-    example:
-      srv_id: "SMC201500250"
-      srv_href: "http://ei-arqaso.igrupobbva:7050/customers/V01/123/"
-      srv_type: "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)"
-      schema_version: string
-      uuaa: "ENAX, KJIM, QZQP, ATRP..."
-      inbound_call:
-        customer_id: "ES0182099817252C"
-        user_id: "xe01379"
-        process_type: "id proceso contratación"
-        process_id: "id instancia única proceso de contratación"
-        session_id: " "
-        user_action_id: " "
-        call_id: " "
-        aap: "00000037"
-        cms:
-          channel: 6
-          medium: 19
-          service: 105
-        user_agent: "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405"
-        hostname: "spnac008"
-        instance_name: "01(clon)"
-        caller_ip: "192.168.1.123"
-        location:
-          geolocation:
-            lat: "37.3591307"
-            lon: "-6.034502"
-          branch:
-            branch_id: "ES01820437"
-            branch_code: "0437"
-            operative_branch: "0883"
-            bank: "0182"
-            operative_bank: "0001"
-            branch_address:
-              province: 41
-              post_code: 28011
-              country: "SPAIN"
-            region: "territorial"
-            head_branch: "CBC"
-        health:
-          timestamp: 1444389041012
-          response_time: 25001
-          http_status_code: 200
-          response_status: "OK"
-          response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
-        msg_in:
-          header: {}
-          body: {}
-        msg_out:
-          header: {}
-          body: {}
-        journal: {}
-        additional_data: {}
-      outbound_calls:
-        srv_href: "http://ei-arqaso.igrupobbva:7050/customers/V01/123/"
-        srv_type: "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)"
-        uuaa: "ENAX, KJIM, QZQP, ATRP..."
-        inbound_call:
-          user_id: " "
-          call_id: " "
-          hostname: " "
-          instance_name: " "
-          health:
-            timestamp: 1444389041012
-            response_time: 25001
-            http_status_code: 200
-            response_status: "OK"
-            response_code: "44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
 
 resourceTypes:
   Collection:
@@ -318,7 +320,7 @@ resourceTypes:
         application/json:
           type: <<item>>
 
-  Member:
+  Item:
     post:
       body:
         application/json:
@@ -327,28 +329,61 @@ resourceTypes:
         200:
 
 traits:
-  FilterableBySrvId:
+  FilterableByHost:
     queryParameters:
-      srv_id?:
+      Host?:
         type: string
-  FilterableBySrvType:
+  FilterableByUUAA:
     queryParameters:
-      srv_type?:
+      UUAA?:
+        type: string
+  FilterableByCookie:
+    queryParameters:
+      Cookie?:
+        type: string
+  FilterableByWebContainer:
+    queryParameters:
+      WebContainer?:
+        type: string
+  FilterableByDate:
+    queryParameters:
+      Date?:
         type: string
 
 /insert:
-    type: { Member: {item : Log} }
+    type: { Item: {item : Log} }
 
-/getBySrvId:
+/getByHost:
     type: { Collection: {item : Log} }
     get:
-      is: FilterableBySrvId
+      is: FilterableByHost
       queryParameters:
-        SrvId: string
+        Host: string
 
-/getBySrvType:
+/getByUUAA:
     type: { Collection: {item : Log} }
     get:
-      is: FilterableBySrvType
+      is: FilterableByUUAA
       queryParameters:
-        SrvId: string
+        UUAA: string
+
+/getByCookie:
+    type: { Collection: {item : Log} }
+    get:
+      is: FilterableByCookie
+      queryParameters:
+        Cookie: string
+
+/getByWebContainer:
+    type: { Collection: {item : Log} }
+    get:
+      is: FilterableByWebContainer
+      queryParameters:
+        WebContainer: string
+
+/getByDate:
+    type: { Collection: {item : Log} }
+    get:
+      is: FilterableByDate
+      queryParameters:
+        Date: string
