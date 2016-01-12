@@ -11,6 +11,10 @@
       "required": true,
       "type": "string"
     },
+    "uuaa": {
+      "required": true,
+      "type": "string"
+    },
     "inbound_call": {
       "required": true,
       "type": "object",

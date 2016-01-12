@@ -73,7 +73,7 @@
       "required": true,
       "type": "string"
     },
-    "location"_: {
+    "location": {
       "required": true,
       "type": "object",
       "properties": {
@@ -143,6 +143,7 @@
             }
           }
         }
+      }
     },
     "health": {
       "required": true,

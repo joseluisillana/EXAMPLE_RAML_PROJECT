@@ -48,35 +48,39 @@ traits:
     type: { Item: {item : Log} }
 
 /getByHost:
-    type: { Collection: {item : Log} }
+    type: { Collection: {item : Log, schema: LogSchema} }
     get:
       is: FilterableByHost
       queryParameters:
         Host: string
 
 /getByUUAA:
-    type: { Collection: {item : Log} }
+    type: { Collection: {item : Log, schema: LogSchema} }
+    description: Devolver trazas de logs filtradas por UUAA
     get:
       is: FilterableByUUAA
       queryParameters:
         UUAA: string
 
 /getByCookie:
-    type: { Collection: {item : Log} }
+    type: { Collection: {item : Log, schema: LogSchema} }
+    description: Devolver trazas de logs filtradas por Cookies
     get:
       is: FilterableByCookie
       queryParameters:
         Cookie: string
 
 /getByWebContainer:
-    type: { Collection: {item : Log} }
+    type: { Collection: {item : Log, schema: LogSchema} }
+    description: Devolver trazas de logs filtradas por WebContainer
     get:
       is: FilterableByWebContainer
       queryParameters:
         WebContainer: string
 
 /getByDate:
-    type: { Collection: {item : Log} }
+    type: { Collection: {item : Log, schema: LogSchema} }
+    description: Devolver trazas de logs filtradas por Fecha o  Intervalo de fechas    
     get:
       is: [ FilterableByDateTime , FilterableByDate ]
       queryParameters:
