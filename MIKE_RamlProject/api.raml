@@ -45,10 +45,12 @@ traits:
   - FilterableByDateTime: !include traits/filterableByDateTime.raml
 
 /insert:
-    type: { Item: {item : Log} }
+    type: { Item: {item : Log, schema: LogSchema} }
+    description: Inserta una traza de log en Kafka
 
 /getByHost:
     type: { Collection: {item : Log, schema: LogSchema} }
+    description: Devolver trazas de logs filtradas por Hosts
     get:
       is: FilterableByHost
       queryParameters:
@@ -80,7 +82,7 @@ traits:
 
 /getByDate:
     type: { Collection: {item : Log, schema: LogSchema} }
-    description: Devolver trazas de logs filtradas por Fecha o  Intervalo de fechas    
+    description: Devolver trazas de logs filtradas por Fecha o  Intervalo de fechas
     get:
       is: [ FilterableByDateTime , FilterableByDate ]
       queryParameters:
