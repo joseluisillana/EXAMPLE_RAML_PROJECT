@@ -3,6 +3,21 @@ title: M.I.K.E API
 version: 1
 baseUri: https://mike.igrupobbva.com/mike-consumer-api/{version}/
 mediaType: application/json
+
+schemas:
+  - LogSchema: !include schemas/logSchema.json
+  - MSG_INSchema: !include schemas/msg_inSchema.json
+  - MSG_OUTSchema: !include schemas/msg_outSchema.json
+  - HealthSchema: !include schemas/healthSchema.json
+  - LocationSchema: !include schemas/locationSchema.json
+  - BranchAddressSchema: !include schemas/branchAddressSchema.json
+  - BranchSchema: !include schemas/branchSchema.json
+  - GeoLocationSchema: !include schemas/geoLocationSchema.json
+  - CMSSchema: !include schemas/cmsSchema.json
+  - InboundCallSchema: !include schemas/inboundCallSchema.json
+  - InboundCallMinusSchema: !include schemas/inboundCallMinusSchema.json
+  - OutboundCallSchema: !include schemas/outboundCallSchema.json
+
 types:
   - Log: !include resourceTypes/logType.raml
   - MSG_IN: !include resourceTypes/msg_inType.raml
