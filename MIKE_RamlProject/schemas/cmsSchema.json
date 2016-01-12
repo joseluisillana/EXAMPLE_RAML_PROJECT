@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": true,
+  "type": "object",
+  "properties": {
+    "channel": {
+      "required": true,
+      "type": "number"
+    },
+    "medium": {
+      "required": true,
+      "type": "number"
+    },
+    "service": {
+      "required": true,
+      "type": "number"
+    }
+  }
+}

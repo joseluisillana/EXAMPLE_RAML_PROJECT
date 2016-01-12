@@ -1,0 +1,210 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": true,
+  "type": "object",
+  "properties": {
+    "costumer_id": {
+      "required": true,
+      "type": "string"
+    },
+    "user_id": {
+      "required": true,
+      "type": "string"
+    },
+    "process_type": {
+      "required": true,
+      "type": "string"
+    },
+    "process_id": {
+      "required": true,
+      "type": "string"
+    },
+    "session_id": {
+      "required": true,
+      "type": "string"
+    },
+    "user_action_id": {
+      "required": true,
+      "type": "string"
+    },
+    "call_id": {
+      "required": true,
+      "type": "string"
+    },
+    "aap": {
+      "required": true,
+      "type": "string"
+    },
+    "cms": {
+      "required": true,
+      "type": "object",
+      "properties": {
+        "channel": {
+          "required": true,
+          "type": "number"
+        },
+        "medium": {
+          "required": true,
+          "type": "number"
+        },
+        "service": {
+          "required": true,
+          "type": "number"
+        }
+      }
+    },
+    "user-agent": {
+      "required": true,
+      "type": "string"
+    },
+    "hostname": {
+      "required": true,
+      "type": "string"
+    },
+    "instance_name": {
+      "required": true,
+      "type": "string"
+    },
+    "caller_ip": {
+      "required": true,
+      "type": "string"
+    },
+    "caller_ip": {
+      "required": true,
+      "type": "string"
+    },
+    "location"_: {
+      "required": true,
+      "type": "object",
+      "properties": {
+        "geolocation": {
+          "required": true,
+          "type": "object",
+          "properties": {
+            "lat": {
+              "required": true,
+              "type": "string"
+            },
+            "lon": {
+              "required": true,
+              "type": "string"
+            }
+          }
+        },
+        "branch": {
+          "required": true,
+          "type": "object",
+          "properties": {
+            "branch_id": {
+              "required": true,
+              "type": "string"
+            },
+            "branch_code": {
+              "required": true,
+              "type": "string"
+            },
+            "operative_branch": {
+              "required": true,
+              "type": "string"
+            },
+            "bank": {
+              "required": true,
+              "type": "string"
+            },
+            "operative_bank": {
+              "required": true,
+              "type": "string"
+            },
+            "branch_address": {
+              "required": true,
+              "type": "object",
+              "properties": {
+                "province": {
+                  "required": true,
+                  "type": "number"
+                },
+                "post_code": {
+                  "required": true,
+                  "type": "number"
+                },
+                "country": {
+                  "required": true,
+                  "type": "string"
+                }
+              }
+            },
+            "region": {
+              "required": true,
+              "type": "string"
+            },
+            "head_branch": {
+              "required": true,
+              "type": "string"
+            }
+          }
+        }
+    },
+    "health": {
+      "required": true,
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "required": true,
+          "type": "number"
+        },
+        "response_time": {
+          "required": true,
+          "type": "number"
+        },
+        "http_status_code": {
+          "required": true,
+          "type": "number"
+        },
+        "response_status": {
+          "required": true,
+          "type": "string"
+        },
+        "response_code": {
+          "required": true,
+          "type": "string"
+        }
+      }
+    },
+    "msg_in": {
+      "required": true,
+      "type": "object",
+      "properties": {
+        "header": {
+          "required": false,
+          "type": "object"
+        },
+        "body": {
+          "required": false,
+          "type": "object"
+        }
+      }
+    },
+    "msg_out": {
+      "required": true,
+      "type": "object",
+      "properties": {
+        "header": {
+          "required": false,
+          "type": "object"
+        },
+        "body": {
+          "required": false,
+          "type": "object"
+        }
+      }
+    },
+    "journal": {
+      "required": true,
+      "type": "object"
+    },
+    "additional_data": {
+      "required": true,
+      "type": "object"
+    }
+  }
+}

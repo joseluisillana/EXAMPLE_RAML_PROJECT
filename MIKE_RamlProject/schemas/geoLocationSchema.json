@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": true,
+  "type": "object",
+  "properties": {
+    "lat": {
+      "required": true,
+      "type": "string"
+    },
+    "lon": {
+      "required": true,
+      "type": "string"
+    }
+  }
+}

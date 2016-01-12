@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": true,
+  "type": "object",
+  "properties": {
+    "province": {
+      "required": true,
+      "type": "number"
+    },
+    "post_code": {
+      "required": true,
+      "type": "number"
+    },
+    "country": {
+      "required": true,
+      "type": "string"
+    }
+  }
+}
