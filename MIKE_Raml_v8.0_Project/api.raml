@@ -1,0 +1,26 @@
+#%RAML 0.8
+title: MikeAPI
+version: v1
+baseUri: http://mike.igrupobbva.com
+schemas:
+  - LogNacar: !include schemas/structuredLog.json
+  - Response500: !include schemas/response500.json
+
+/getAll:
+  displayName: getAll
+  description: Get all logs
+  get:
+      description: Get all logs
+      responses:
+          200:
+              description: !include documentation/responseGetAll_200.txt
+              body:
+                  application/json:
+                      schema: LogNacar
+                      example: !include examples/structuredLogExample.json
+          500:
+              description: !include documentation/responseGetAll_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json

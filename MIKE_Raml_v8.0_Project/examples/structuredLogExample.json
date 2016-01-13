@@ -1,0 +1,83 @@
+{
+  "srv_id": "SMC201500250",
+  "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
+  "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
+  "schema_version": "1.0",
+  "uuaa": "ENAX, KJIM, QZQP, ATRP...",
+  "inbound_call": {
+    "custormer_id": "ES0182099817252C",
+    "user_id": "xe01379",
+    "process_type": "id proceso contratación",
+    "process_id": "id instancia única proceso de contratación",
+    "session_id": "id Sesión",
+    "user_action_id": "id Usuario ejecutor",
+    "call_id": "id llamada",
+    "aap": "00000037",
+    "cms": {
+      "channel": 6,
+      "medium": 19,
+      "service": 105
+    },
+    "user_agent": "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405",
+    "hostname": "spnac008",
+    "instance_name": "01(clon)",
+    "caller_ip": "192.168.1.123",
+    "location": {
+      "geolocation": {
+        "lat": "37.3591307",
+        "lon": "-6.034502"
+      },
+      "branch": {
+        "branch_id": "ES01820437",
+        "branch_code": "0437",
+        "operative_branch": "0883",
+        "bank": "0182",
+        "operative_bank": "0001",
+        "branch_address": {
+          "province": 41,
+          "post_code": 28011,
+          "country": "País"
+        },
+        "region": "región",
+        "head_branch": " "
+      }
+    },
+    "health": {
+      "timestamp": 1444389041012,
+      "response_time": 25001,
+      "http_status_code": 200,
+      "response_status": "OK",
+      "response_code": "Servicios: invalidAccountParameter, invalidParameters, etc.Backend: 44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+    },
+    "msg_in": {
+      "header": {},
+      "body": {}
+    },
+    "msg_out": {
+      "header": "{}",
+      "body": "{}"
+    },
+    "journal": "{}",
+    "additional_data": "{}"
+  },
+  "outbound_calls": [
+    {
+      "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
+      "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
+      "uuaa": "ENAX, KJIM, QZQP, ATRP...",
+      "inbound_call": {
+        "user_id": "xe01379",
+        "call_id": "id llamada",
+        "hostname": "spnac008",
+        "instance_name": "01(clon)",
+        "health": {
+          "timestamp": 1444389041012,
+          "response_time": 25001,
+          "http_status_code": 200,
+          "response_status": "OK",
+          "response_code": "Servicios: invalidAccountParameter, invalidParameters, etc.Backend: 44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+        }
+      }
+    }
+  ]
+}
