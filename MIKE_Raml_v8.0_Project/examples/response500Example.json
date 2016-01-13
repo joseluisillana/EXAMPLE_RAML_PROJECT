@@ -1,4 +1,4 @@
 {
   "status_code": 500,
-  "status_message": "Error interno del servidor"
+  "status_message": "The server encountered an unexpected condition which prevented it from fulfilling the request."
 }

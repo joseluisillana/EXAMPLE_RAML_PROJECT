@@ -1,0 +1,1 @@
+M.I.K.E - Respuesta con Modelo Canónico Standar logs filtrados por un rango de fechas en foramto timestamp, o una fecha concreta en formato DD/MM/YYYY

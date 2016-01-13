@@ -1,26 +1,232 @@
 #%RAML 0.8
 title: MikeAPI
 version: v1
-baseUri: http://mike.igrupobbva.com
+baseUri: http://{domain}/{apiversion}/mike
+baseUriParameters:
+  domain:
+    description: The host where the API is accessed by clients.
+  apiversion:
+    description: The version of the API.
+    
 schemas:
-  - LogNacar: !include schemas/structuredLog.json
+  - StructuredLog: !include schemas/structuredLog.json
+  - Response200: !include schemas/response200.json
+  - Response201: !include schemas/response201.json
   - Response500: !include schemas/response500.json
+  - Response404: !include schemas/response404.json
 
-/getAll:
-  displayName: getAll
-  description: Get all logs
+/health:
+  displayName: health
+  description: Requests for querying over the global health monitorization.
   get:
-      description: Get all logs
+      description: Get all logs.
       responses:
           200:
               description: !include documentation/responseGetAll_200.txt
               body:
                   application/json:
-                      schema: LogNacar
+                      schema: StructuredLog
                       example: !include examples/structuredLogExample.json
           500:
-              description: !include documentation/responseGetAll_500.txt
+              description: !include documentation/response_500.txt
               body:
                   application/json:
                       schema: Response500
                       example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+  post:
+    description: Put a new trace on the system
+    body:
+        application/json:
+                          schema: StructuredLog
+                          example: !include examples/structuredLogExample.json
+    responses:
+          201:
+              description: !include documentation/response_201.txt
+              body:
+                  application/json:
+                      schema: Response201
+                      example: !include examples/response201Example.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+/health/getByHost:
+  displayName: health/getByHost
+  description: Requests for querying over the global health monitorization filtering by host.
+  get:
+      queryParameters:
+        hostParam:
+          description: "The name or IP about the host to search"
+          required: true
+          minLength: 3
+          type: string
+          example: "nacar01"
+      description: Get all logs filtering by host.
+      responses:
+          200:
+              description: !include documentation/responseGetByHost_200.txt
+              body:
+                  application/json:
+                      schema: StructuredLog
+                      example: !include examples/structuredLogExample.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+/health/getByUUAA:
+  displayName: health/getByUUAA
+  description: Requests for querying over the global health monitorization filtering by UUAA.
+  get:
+      queryParameters:
+        hostParam:
+          description: "The UUAA to search"
+          required: true
+          minLength: 3
+          type: string
+          example: "EREP01"
+      description: Get all logs filtering by uuaa.
+      responses:
+          200:
+              description: !include documentation/responseGetByUUAA_200.txt
+              body:
+                  application/json:
+                      schema: StructuredLog
+                      example: !include examples/structuredLogExample.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+/health/getByCookie:
+  displayName: health/getByCookie
+  description: Requests for querying over the global health monitorization filtering by Cookie.
+  get:
+      queryParameters:
+        hostParam:
+          description: "The Cookie to search"
+          required: true
+          minLength: 3
+          type: string
+          example: " "
+      description: Get all logs filtering by a cookie.
+      responses:
+          200:
+              description: !include documentation/responseGetByCookie_200.txt
+              body:
+                  application/json:
+                      schema: StructuredLog
+                      example: !include examples/structuredLogExample.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+/health/getByWebContainer:
+  displayName: health/getByWebContainer
+  description: Requests for querying over the global health monitorization filtering by WebContainer.
+  get:
+      queryParameters:
+        hostParam:
+          description: "The WebContainer to search"
+          required: true
+          minLength: 3
+          type: string
+          example: " "
+      description: Get all logs filtering by a WebContainer.
+      responses:
+          200:
+              description: !include documentation/responseGetByWebContainer_200.txt
+              body:
+                  application/json:
+                      schema: StructuredLog
+                      example: !include examples/structuredLogExample.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+/health/getByDate:
+  displayName: health/getByDate
+  description: Requests for querying over the global health monitorization filtering by WebContainer.
+  get:
+      queryParameters:
+        date:
+          description: "The Date to search"
+          required: false
+          minLength: 10
+          type: string
+          example: "01/01/1970"
+        min_timestamp:
+          description: "The min timestamp date to search"
+          required: false
+          type: number
+          example: 1444389041012
+        max_timestamp:
+          description: "The max timestamp date to search"
+          required: false
+          type: number
+          example: 1444389041012
+      description: Get all logs filtering by a Date or a range or dates in timestamp format.
+      responses:
+          200:
+              description: !include documentation/responseGetByDate_200.txt
+              body:
+                  application/json:
+                      schema: StructuredLog
+                      example: !include examples/structuredLogExample.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+  
