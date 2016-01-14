@@ -1,4 +1,7 @@
 {
-  "status_code": 404,
-  "status_message": "M.I.K.E - The server has not found anything matching the URI given."
+  "response_status": {
+    "status_code": 404,
+    "status_message": "M.I.K.E - The server has not found anything matching the URI given."
+  },
+  "response_body": [{}]
 }

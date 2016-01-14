@@ -1,232 +1,116 @@
 #%RAML 0.8
 title: MikeAPI
 version: v1
-baseUri: http://{domain}/{apiversion}/mike
-baseUriParameters:
-  domain:
-    description: The host where the API is accessed by clients.
-  apiversion:
-    description: The version of the API.
-    
-schemas:
-  - StructuredLog: !include schemas/structuredLog.json
-  - Response200: !include schemas/response200.json
-  - Response201: !include schemas/response201.json
-  - Response500: !include schemas/response500.json
-  - Response404: !include schemas/response404.json
+#baseUri: http://{domain}/{apiversion}/mike
+baseUri: http://mike.igrupobbva.com/mike/v1
+mediaType: application/json
+documentation:
+  - title: Overview
+    content: |
+      M.I.K.E - monitoring IT Key Engine API
+      This API serves endpoints to write and query over logs with different systems
+      and different schemas.
+      - Structured Logs: Logs which are composed following the canonical model.
+      - Non-structured Logs: Logs without model, that needs to be proccessed to turn on an useful log.
 
-/health:
+schemas:
+  - Response: !include schemas/responseSchema.json
+#  - StructuredLog: !include schemas/structuredLog.json
+#  - Response200: !include schemas/response200.json
+#  - Response201: !include schemas/response201.json
+#  - Response500: !include schemas/response500.json
+#  - Response404: !include schemas/response404.json
+
+traits:
+  - eventTypeSelector:
+      queryParameters:
+        filters:
+          description: "The filters to use in the query."
+          required: false
+          minLength: 3
+          type: string
+          example: "filters=field1:value1,field2:value2,etc..."
+        fields:
+            description: "The fields to expose in the results."
+            required: false
+            minLength: 3
+            type: string
+            example: "fields=field1,field2,field3,etc .."
+        orderBy:
+            description: "The sorting options to return the results ordered by a field or dimension."
+            required: false
+            minLength: 3
+            type: string
+            example: "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc .."
+        dateFrom:
+          description: "The starter date in timestamp format to filter the results in the query."
+          required: true
+          minLength: 13
+          type: string
+          example: "dateFrom=1444389041012"
+        dateTo:
+          description: "The top date in timestamp format to filter the results in the query."
+          required: false
+          minLength: 13
+          type: string
+          example: "dateTo=1444389041012"
+
+/health/{eventtype}:
   displayName: health
-  description: Requests for querying over the global health monitorization.
+  description: |
+   Requests for querying over the global health monitorization.
+   It returns or write a specific kind of trace, identified by the name of the event type on the URI, it must be 'shortevent' o 'longevent'.
+  uriParameters:
+    eventtype:
+      description: The name of the event type, it must be 'shortevent' o 'longevent'.
+      displayName: Event Type
+      required: true
+      enum: [shortevent,longevent]
+      type: string
   get:
       description: Get all logs.
+      is: [eventTypeSelector]
       responses:
           200:
-              description: !include documentation/responseGetAll_200.txt
+              description: !include documentation/response_200.txt
               body:
                   application/json:
-                      schema: StructuredLog
-                      example: !include examples/structuredLogExample.json
+                      schema: Response
+                      example: !include examples/response200Example.json
           500:
               description: !include documentation/response_500.txt
               body:
                   application/json:
-                      schema: Response500
+                      schema: Response
                       example: !include examples/response500Example.json
           404:
               description: !include documentation/response_404.txt
               body:
                   application/json:
-                      schema: Response404
+                      schema: Response
                       example: !include examples/response404Example.json
   post:
     description: Put a new trace on the system
     body:
         application/json:
-                          schema: StructuredLog
-                          example: !include examples/structuredLogExample.json
+                          schema: Response
+                          example: !include examples/response200Example.json
     responses:
           201:
               description: !include documentation/response_201.txt
               body:
                   application/json:
-                      schema: Response201
+                      schema: Response
                       example: !include examples/response201Example.json
           500:
               description: !include documentation/response_500.txt
               body:
                   application/json:
-                      schema: Response500
+                      schema: Response
                       example: !include examples/response500Example.json
           404:
               description: !include documentation/response_404.txt
               body:
                   application/json:
-                      schema: Response404
+                      schema: Response
                       example: !include examples/response404Example.json
-/health/getByHost:
-  displayName: health/getByHost
-  description: Requests for querying over the global health monitorization filtering by host.
-  get:
-      queryParameters:
-        hostParam:
-          description: "The name or IP about the host to search"
-          required: true
-          minLength: 3
-          type: string
-          example: "nacar01"
-      description: Get all logs filtering by host.
-      responses:
-          200:
-              description: !include documentation/responseGetByHost_200.txt
-              body:
-                  application/json:
-                      schema: StructuredLog
-                      example: !include examples/structuredLogExample.json
-          500:
-              description: !include documentation/response_500.txt
-              body:
-                  application/json:
-                      schema: Response500
-                      example: !include examples/response500Example.json
-          404:
-              description: !include documentation/response_404.txt
-              body:
-                  application/json:
-                      schema: Response404
-                      example: !include examples/response404Example.json
-/health/getByUUAA:
-  displayName: health/getByUUAA
-  description: Requests for querying over the global health monitorization filtering by UUAA.
-  get:
-      queryParameters:
-        hostParam:
-          description: "The UUAA to search"
-          required: true
-          minLength: 3
-          type: string
-          example: "EREP01"
-      description: Get all logs filtering by uuaa.
-      responses:
-          200:
-              description: !include documentation/responseGetByUUAA_200.txt
-              body:
-                  application/json:
-                      schema: StructuredLog
-                      example: !include examples/structuredLogExample.json
-          500:
-              description: !include documentation/response_500.txt
-              body:
-                  application/json:
-                      schema: Response500
-                      example: !include examples/response500Example.json
-          404:
-              description: !include documentation/response_404.txt
-              body:
-                  application/json:
-                      schema: Response404
-                      example: !include examples/response404Example.json
-/health/getByCookie:
-  displayName: health/getByCookie
-  description: Requests for querying over the global health monitorization filtering by Cookie.
-  get:
-      queryParameters:
-        hostParam:
-          description: "The Cookie to search"
-          required: true
-          minLength: 3
-          type: string
-          example: " "
-      description: Get all logs filtering by a cookie.
-      responses:
-          200:
-              description: !include documentation/responseGetByCookie_200.txt
-              body:
-                  application/json:
-                      schema: StructuredLog
-                      example: !include examples/structuredLogExample.json
-          500:
-              description: !include documentation/response_500.txt
-              body:
-                  application/json:
-                      schema: Response500
-                      example: !include examples/response500Example.json
-          404:
-              description: !include documentation/response_404.txt
-              body:
-                  application/json:
-                      schema: Response404
-                      example: !include examples/response404Example.json
-/health/getByWebContainer:
-  displayName: health/getByWebContainer
-  description: Requests for querying over the global health monitorization filtering by WebContainer.
-  get:
-      queryParameters:
-        hostParam:
-          description: "The WebContainer to search"
-          required: true
-          minLength: 3
-          type: string
-          example: " "
-      description: Get all logs filtering by a WebContainer.
-      responses:
-          200:
-              description: !include documentation/responseGetByWebContainer_200.txt
-              body:
-                  application/json:
-                      schema: StructuredLog
-                      example: !include examples/structuredLogExample.json
-          500:
-              description: !include documentation/response_500.txt
-              body:
-                  application/json:
-                      schema: Response500
-                      example: !include examples/response500Example.json
-          404:
-              description: !include documentation/response_404.txt
-              body:
-                  application/json:
-                      schema: Response404
-                      example: !include examples/response404Example.json
-/health/getByDate:
-  displayName: health/getByDate
-  description: Requests for querying over the global health monitorization filtering by WebContainer.
-  get:
-      queryParameters:
-        date:
-          description: "The Date to search"
-          required: false
-          minLength: 10
-          type: string
-          example: "01/01/1970"
-        min_timestamp:
-          description: "The min timestamp date to search"
-          required: false
-          type: number
-          example: 1444389041012
-        max_timestamp:
-          description: "The max timestamp date to search"
-          required: false
-          type: number
-          example: 1444389041012
-      description: Get all logs filtering by a Date or a range or dates in timestamp format.
-      responses:
-          200:
-              description: !include documentation/responseGetByDate_200.txt
-              body:
-                  application/json:
-                      schema: StructuredLog
-                      example: !include examples/structuredLogExample.json
-          500:
-              description: !include documentation/response_500.txt
-              body:
-                  application/json:
-                      schema: Response500
-                      example: !include examples/response500Example.json
-          404:
-              description: !include documentation/response_404.txt
-              body:
-                  application/json:
-                      schema: Response404
-                      example: !include examples/response404Example.json
-  
