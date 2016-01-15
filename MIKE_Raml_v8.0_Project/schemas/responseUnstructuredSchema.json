@@ -16,9 +16,16 @@
         "status_code",
         "status_message"
       ]
+    },
+    "response_body": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "required": [
-    "response_status"
+    "response_status",
+    "response_body"
   ]
 }

@@ -14,12 +14,11 @@ documentation:
       - Non-structured Logs: Logs without model, that needs to be proccessed to turn on an useful log.
 
 schemas:
-  - Response: !include schemas/responseSchema.json
-#  - StructuredLog: !include schemas/structuredLog.json
-#  - Response200: !include schemas/response200.json
-#  - Response201: !include schemas/response201.json
-#  - Response500: !include schemas/response500.json
-#  - Response404: !include schemas/response404.json
+  - ResponseStructuredLog: !include schemas/responseStructuredSchema.json
+  - ResponseUnstructuredLog: !include schemas/responseUnstructuredSchema.json
+  - Response201: !include schemas/response201.json
+  - Response500: !include schemas/response500.json
+  - Response404: !include schemas/response404.json
 
 traits:
   - eventTypeSelector:
@@ -55,18 +54,11 @@ traits:
           type: string
           example: "dateTo=1444389041012"
 
-/health/{eventtype}:
-  displayName: health
+/log/structured:
+  displayName: log/structured
   description: |
    Requests for querying over the global health monitorization.
    It returns or write a specific kind of trace, identified by the name of the event type on the URI, it must be 'shortevent' o 'longevent'.
-  uriParameters:
-    eventtype:
-      description: The name of the event type, it must be 'shortevent' o 'longevent'.
-      displayName: Event Type
-      required: true
-      enum: [shortevent,longevent]
-      type: string
   get:
       description: Get all logs.
       is: [eventTypeSelector]
@@ -75,42 +67,95 @@ traits:
               description: !include documentation/response_200.txt
               body:
                   application/json:
-                      schema: Response
-                      example: !include examples/response200Example.json
+                      schema: ResponseStructuredLog
+                      example: !include examples/responseStructuredLog200Example.json
           500:
               description: !include documentation/response_500.txt
               body:
                   application/json:
-                      schema: Response
+                      schema: Response500
                       example: !include examples/response500Example.json
           404:
               description: !include documentation/response_404.txt
               body:
                   application/json:
-                      schema: Response
+                      schema: Response404
                       example: !include examples/response404Example.json
   post:
     description: Put a new trace on the system
     body:
         application/json:
-                          schema: Response
+                          schema: ResponseStructuredLog
                           example: !include examples/response200Example.json
     responses:
           201:
               description: !include documentation/response_201.txt
               body:
                   application/json:
-                      schema: Response
+                      schema: Response201
                       example: !include examples/response201Example.json
           500:
               description: !include documentation/response_500.txt
               body:
                   application/json:
-                      schema: Response
+                      schema: Response500
                       example: !include examples/response500Example.json
           404:
               description: !include documentation/response_404.txt
               body:
                   application/json:
-                      schema: Response
+                      schema: Response404
+                      example: !include examples/response404Example.json
+
+/log/unstructured:
+  displayName: log/unstructured
+  description: |
+   Requests for querying over the global monitorization.
+   It returns or write a specific kind of trace, identified by the name of the event type on the URI.
+  get:
+      description: Get all logs.
+      is: [eventTypeSelector]
+      responses:
+          200:
+              description: !include documentation/response_200.txt
+              body:
+                  application/json:
+                      schema: ResponseUnstructuredLog
+                      example: !include examples/responseUnstructuredLog200Example.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
+                      example: !include examples/response404Example.json
+  post:
+    description: Put a new trace on the system
+    body:
+        application/json:
+                          schema: ResponseUnstructuredLog
+                          example: !include examples/responseUnstructuredLog200Example.json
+    responses:
+          201:
+              description: !include documentation/response_201.txt
+              body:
+                  application/json:
+                      schema: Response201
+                      example: !include examples/response201Example.json
+          500:
+              description: !include documentation/response_500.txt
+              body:
+                  application/json:
+                      schema: Response500
+                      example: !include examples/response500Example.json
+          404:
+              description: !include documentation/response_404.txt
+              body:
+                  application/json:
+                      schema: Response404
                       example: !include examples/response404Example.json

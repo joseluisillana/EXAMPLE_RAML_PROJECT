@@ -1,0 +1,10 @@
+{
+  "response_status": {
+    "status_code": 200,
+    "status_message": "M.I.K.E - OK."
+  },
+  "response_body": [
+    "17/10/2014 18:45:03.190 fMpushqiHl2zEtkA7wDDiWq WebContainer : 1 La clave PAR.DATOS_SALIDA.DATOS.FILAS.19.COLUMNA.21.0 tiene el dato 1,58  ##Servicio: ATAESG00052XX2",
+    "17/10/2014 18:45:03.190 fMpushqiHl2zEtkA7wDDiWq WebContainer : 1 La clave PAR.DATOS_SALIDA.DATOS.FILAS.19.COLUMNA.20.0 tiene el dato 1.580,70  ##Servicio: ATAESG00052XX2"
+  ]
+}
