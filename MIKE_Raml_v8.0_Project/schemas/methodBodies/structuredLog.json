@@ -191,43 +191,6 @@
           },
           "uuaa": {
             "type": "string"
-          },
-          "inbound_call": {
-            "type": "object",
-            "properties": {
-              "user_id": {
-                "type": "string"
-              },
-              "call_id": {
-                "type": "string"
-              },
-              "hostname": {
-                "type": "string"
-              },
-              "instance_name": {
-                "type": "string"
-              },
-              "health": {
-                "type": "object",
-                "properties": {
-                  "timestamp": {
-                    "type": "integer"
-                  },
-                  "response_time": {
-                    "type": "integer"
-                  },
-                  "http_status_code": {
-                    "type": "integer"
-                  },
-                  "response_status": {
-                    "type": "string"
-                  },
-                  "response_code": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -237,7 +200,6 @@
     "srv_id",
     "srv_href",
     "srv_type",
-    "schema_version",
     "uuaa",
     "inbound_call",
     "outbound_calls"

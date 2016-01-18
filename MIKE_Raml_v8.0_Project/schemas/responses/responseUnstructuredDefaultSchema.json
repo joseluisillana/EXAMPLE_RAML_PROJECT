@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    },
+    "response_body": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}

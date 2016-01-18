@@ -2,7 +2,6 @@
   "srv_id": "SMC201500250",
   "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
   "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
-  "schema_version": "1.0",
   "uuaa": "ENAX, KJIM, QZQP, ATRP...",
   "inbound_call": {
     "custormer_id": "ES0182099817252C",
@@ -64,20 +63,7 @@
     {
       "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
       "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
-      "uuaa": "ENAX, KJIM, QZQP, ATRP...",
-      "inbound_call": {
-        "user_id": "xe01379",
-        "call_id": "id llamada",
-        "hostname": "spnac008",
-        "instance_name": "01(clon)",
-        "health": {
-          "timestamp": 1444389041012,
-          "response_time": 25001,
-          "http_status_code": 200,
-          "response_status": "OK",
-          "response_code": "Servicios: invalidAccountParameter, invalidParameters, etc.Backend: 44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
-        }
-      }
+      "uuaa": "ENAX, KJIM, QZQP, ATRP..."
     }
   ]
 }

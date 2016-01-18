@@ -31,9 +31,6 @@
           "srv_type": {
             "type": "string"
           },
-          "schema_version": {
-            "type": "string"
-          },
           "uuaa": {
             "type": "string"
           },
@@ -211,43 +208,6 @@
                 },
                 "uuaa": {
                   "type": "string"
-                },
-                "inbound_call": {
-                  "type": "object",
-                  "properties": {
-                    "user_id": {
-                      "type": "string"
-                    },
-                    "call_id": {
-                      "type": "string"
-                    },
-                    "hostname": {
-                      "type": "string"
-                    },
-                    "instance_name": {
-                      "type": "string"
-                    },
-                    "health": {
-                      "type": "object",
-                      "properties": {
-                        "timestamp": {
-                          "type": "integer"
-                        },
-                        "response_time": {
-                          "type": "integer"
-                        },
-                        "http_status_code": {
-                          "type": "integer"
-                        },
-                        "response_status": {
-                          "type": "string"
-                        },
-                        "response_code": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
