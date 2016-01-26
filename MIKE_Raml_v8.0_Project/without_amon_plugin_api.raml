@@ -1,0 +1,163 @@
+#%RAML 0.8
+title: MikeAPI
+version: v1
+baseUri: http://{domain}/mike/{apiversion}
+mediaType: application/json
+documentation:
+  - title: Overview
+    content: |
+      M.I.K.E - monitoring IT Key Engine API
+      This API serves endpoints to write and query over logs with different systems
+      and different schemas.
+      - Structured Logs: Logs which are composed following the canonical model.
+      - Non-structured Logs: Logs without model, that needs to be proccessed to turn on an useful log.
+
+schemas:
+  - InputBodyStructuredLog: schemas/methodBodies/structuredLog.json
+  - InputBodyUnstructuredLog: schemas/methodBodies/unstructuredLog.json
+  - ResponseGetStructuredLog: schemas/responses/responseGetStructuredSchema.json
+  - ResponseGetUnstructuredLog: schemas/responses/responseGetUnstructuredSchema.json
+  - ResponseStructuredDefault: schemas/responses/responseStructuredDefaultSchema.json
+  - ResponseUnstructuredDefault: schemas/responses/responseUnstructuredDefaultSchema.json
+  - Response201: schemas/responses/response201.json
+  - Response500: schemas/responses/response500.json
+  - Response404: schemas/responses/response404.json
+
+traits:
+  - eventTypeSelector:
+      queryParameters:
+        filters:
+          description: "The filters to use in the query."
+          required: false
+          minLength: 3
+          type: string
+          example: "filters=field1:value1,field2:value2,etc..."
+        fields:
+            description: "The fields to expose in the results."
+            required: false
+            minLength: 3
+            type: string
+            example: "fields=field1,field2,field3,etc .."
+        orderBy:
+            description: "The sorting options to return the results ordered by a field or dimension."
+            required: false
+            minLength: 3
+            type: string
+            example: "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc .."
+        dateFrom:
+          description: "The starter date in timestamp format to filter the results in the query."
+          required: true
+          minLength: 13
+          type: string
+          example: "dateFrom=1444389041012"
+        dateTo:
+          description: "The top date in timestamp format to filter the results in the query."
+          required: false
+          minLength: 13
+          type: string
+          example: "dateTo=1444389041012"
+
+/log/structured:
+  displayName: log/structured
+  description: |
+   Requests for querying over the global health monitorization.
+   It returns or write a specific kind of trace, identified by the name of the event type on the URI, 'structured' means a log with a defined model.
+  get:
+      description: Get a list of logs which are structured following the canonical model.
+      responses:
+          200:
+              description: documentation/response_structured_200.md
+              body:
+                  application/json:
+                      schema: ResponseGetStructuredLog
+                      example: examples/responses/responseStructuredLog200Example.json
+          500:
+              description: documentation/response_500.md
+              body:
+                  application/json:
+                      schema: Response500
+                      example: examples/responses/response500Example.json
+          404:
+              description: documentation/response_404.md
+              body:
+                  application/json:
+                      schema: Response404
+                      example: examples/responses/response404Example.json
+  post:
+    description: Put a new trace on the system
+    body:
+        application/json:
+                          schema: InputBodyStructuredLog
+                          example: examples/methodBodies/structuredLogExample.json
+    responses:
+          201:
+              description: documentation/response_201.md
+              body:
+                  application/json:
+                      schema: Response201
+                      example: examples/responses/response201Example.json
+          500:
+              description: documentation/response_500.md
+              body:
+                  application/json:
+                      schema: Response500
+                      example: examples/responses/response500Example.json
+          404:
+              description: documentation/response_404.md
+              body:
+                  application/json:
+                      schema: Response404
+                      example: examples/responses/response404Example.json
+
+/log/unstructured:
+  displayName: log/unstructured
+  description: |
+   Requests for querying over the global health monitorization.
+   It returns or write a specific kind of trace, identified by the name of the event type on the URI, 'unstructured' means a log without a defined model.
+  get:
+      description: Get all logs.
+      is: [eventTypeSelector]
+      responses:
+          200:
+              description: documentation/response_unstructured_200.md
+              body:
+                  application/json:
+                      schema: ResponseGetUnstructuredLog
+                      example: examples/responses/responseUnstructuredLog200Example.json
+          500:
+              description: documentation/response_500.md
+              body:
+                  application/json:
+                      schema: Response500
+                      example: examples/responses/response500Example.json
+          404:
+              description: documentation/response_404.md
+              body:
+                  application/json:
+                      schema: Response404
+                      example: examples/responses/response404Example.json
+  post:
+    description: Put a new trace on the system
+    body:
+        application/json:
+              schema: InputBodyUnstructuredLog
+              example: examples/methodBodies/unstructuredLogExample.json
+    responses:
+          201:
+              description: documentation/response_201.md
+              body:
+                  application/json:
+                      schema: Response201
+                      example: examples/responses/response201Example.json
+          500:
+              description: documentation/response_500.md
+              body:
+                  application/json:
+                      schema: Response500
+                      example: examples/responses/response500Example.json
+          404:
+              description: documentation/response_404.md
+              body:
+                  application/json:
+                      schema: Response404
+                      example: examples/responses/response404Example.json

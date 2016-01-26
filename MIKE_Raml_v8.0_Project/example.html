@@ -1,0 +1,1004 @@
+<!DOCTYPE HTML><html><head><title>MikeAPI API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/kevinrenskers/raml2html 2.1.2"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>MikeAPI API documentation <small>version v1</small></h1><p>http://mike.igrupobbva.com/mike/v1</p><h3 id="Overview"><a href="#Overview">Overview</a></h3><p>M.I.K.E - monitoring IT Key Engine API This API serves endpoints to write and query over logs with different systems and different schemas.</p><ul><li>Structured Logs: Logs which are composed following the canonical model.</li><li>Non-structured Logs: Logs without model, that needs to be proccessed to turn on an useful log.</li></ul></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log_structured" class="panel-title">log/structured</h3></div><div class="panel-body"><div class="top-resource-description"><p>Requests for querying over the global health monitorization. It returns or write a specific kind of trace, identified by the name of the event type on the URI, &#39;structured&#39; means a log with a defined model.</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log_structured"><span class="parent"></span>/log/structured</a> <span class="methods"><a href="#log_structured_get"><span class="badge badge_get">get</span></a> <a href="#log_structured_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_log_structured" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_structured_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of logs which are structured following the canonical model.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#log_structured_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Put a new trace on the system</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_structured_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/log/structured</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of logs which are structured following the canonical model.</p></div><ul class="nav nav-tabs"><li><a href="#log_structured_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane" id="log_structured_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>-- M.I.K.E API-- method: Get path: /log/structured description: This method is to get a list of logs which are structured following the canonical model. It should be queried filtering by the one or more fields follow:</p><ul><li>filters.- The filters to use in the query. per example; "filters=field1:value1,field2:value2,etc..."</li><li>fields.- The fields to expose in the results. per example; "fields=field1,field2,field3,etc ..."</li><li>orderBy.- The sorting options to return the results ordered by a field or dimension. per example; "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc ..."</li><li>dateFrom.- The starter date in timestamp format to filter the results in the query. per example; "dateFrom=1444389041012"</li><li>dateTo.- The top date in timestamp format to filter the results in the query. per example; "dateTo=1444389041012"</li></ul><p>message: M.I.K.E - OK.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    },
+    "response_body": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "srv_id": {
+            "type": "string"
+          },
+          "srv_href": {
+            "type": "string"
+          },
+          "srv_type": {
+            "type": "string"
+          },
+          "uuaa": {
+            "type": "string"
+          },
+          "inbound_call": {
+            "type": "object",
+            "properties": {
+              "custormer_id": {
+                "type": "string"
+              },
+              "user_id": {
+                "type": "string"
+              },
+              "process_type": {
+                "type": "string"
+              },
+              "process_id": {
+                "type": "string"
+              },
+              "session_id": {
+                "type": "string"
+              },
+              "user_action_id": {
+                "type": "string"
+              },
+              "call_id": {
+                "type": "string"
+              },
+              "aap": {
+                "type": "string"
+              },
+              "cms": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "type": "integer"
+                  },
+                  "medium": {
+                    "type": "integer"
+                  },
+                  "service": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "user_agent": {
+                "type": "string"
+              },
+              "hostname": {
+                "type": "string"
+              },
+              "instance_name": {
+                "type": "string"
+              },
+              "caller_ip": {
+                "type": "string"
+              },
+              "location": {
+                "type": "object",
+                "properties": {
+                  "geolocation": {
+                    "type": "object",
+                    "properties": {
+                      "lat": {
+                        "type": "string"
+                      },
+                      "lon": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "branch": {
+                    "type": "object",
+                    "properties": {
+                      "branch_id": {
+                        "type": "string"
+                      },
+                      "branch_code": {
+                        "type": "string"
+                      },
+                      "operative_branch": {
+                        "type": "string"
+                      },
+                      "bank": {
+                        "type": "string"
+                      },
+                      "operative_bank": {
+                        "type": "string"
+                      },
+                      "branch_address": {
+                        "type": "object",
+                        "properties": {
+                          "province": {
+                            "type": "integer"
+                          },
+                          "post_code": {
+                            "type": "integer"
+                          },
+                          "country": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "region": {
+                        "type": "string"
+                      },
+                      "head_branch": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "health": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "response_time": {
+                    "type": "integer"
+                  },
+                  "http_status_code": {
+                    "type": "integer"
+                  },
+                  "response_status": {
+                    "type": "string"
+                  },
+                  "response_code": {
+                    "type": "string"
+                  }
+                }
+              },
+              "msg_in": {
+                "type": "object",
+                "properties": {
+                  "header": {
+                    "type": "object",
+                    "properties": {}
+                  },
+                  "body": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "msg_out": {
+                "type": "object",
+                "properties": {
+                  "header": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  }
+                }
+              },
+              "journal": {
+                "type": "string"
+              },
+              "additional_data": {
+                "type": "string"
+              }
+            }
+          },
+          "outbound_calls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "srv_href": {
+                  "type": "string"
+                },
+                "srv_type": {
+                  "type": "string"
+                },
+                "uuaa": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "response_status",
+    "response_body"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 200,
+    "status_message": "M.I.K.E - OK."
+  },
+  "response_body": [{}]
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>-- M.I.K.E API-- method: Get path: /log/structured description: This method is to get a list of logs which are structured following the canonical model. It should be queried filtering by the one or more fields follow:</p><ul><li>filters.- The filters to use in the query. per example; "filters=field1:value1,field2:value2,etc..."</li><li>fields.- The fields to expose in the results. per example; "fields=field1,field2,field3,etc ..."</li><li>orderBy.- The sorting options to return the results ordered by a field or dimension. per example; "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc ..."</li><li>dateFrom.- The starter date in timestamp format to filter the results in the query. per example; "dateFrom=1444389041012"</li><li>dateTo.- The top date in timestamp format to filter the results in the query. per example; "dateTo=1444389041012" message: M.I.K.E - The server has not found anything matching the Request-URI. No indication is given of whether the condition is temporary or permanent.</li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 404,
+    "status_message": "M.I.K.E - The server has not found anything matching the URI given."
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>M.I.K.E - The server encountered an unexpected condition which prevented it from fulfilling the request.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 500,
+    "status_message": "The server encountered an unexpected condition which prevented it from fulfilling the request."
+  }
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_structured_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/log/structured</h4></div><div class="modal-body"><div class="alert alert-info"><p>Put a new trace on the system</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_structured_post_request" data-toggle="tab">Request</a></li><li><a href="#log_structured_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_structured_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "srv_id": {
+      "type": "string"
+    },
+    "srv_href": {
+      "type": "string"
+    },
+    "srv_type": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "uuaa": {
+      "type": "string"
+    },
+    "inbound_call": {
+      "type": "object",
+      "properties": {
+        "custormer_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "process_type": {
+          "type": "string"
+        },
+        "process_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "user_action_id": {
+          "type": "string"
+        },
+        "call_id": {
+          "type": "string"
+        },
+        "aap": {
+          "type": "string"
+        },
+        "cms": {
+          "type": "object",
+          "properties": {
+            "channel": {
+              "type": "integer"
+            },
+            "medium": {
+              "type": "integer"
+            },
+            "service": {
+              "type": "integer"
+            }
+          }
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "instance_name": {
+          "type": "string"
+        },
+        "caller_ip": {
+          "type": "string"
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "geolocation": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "string"
+                },
+                "lon": {
+                  "type": "string"
+                }
+              }
+            },
+            "branch": {
+              "type": "object",
+              "properties": {
+                "branch_id": {
+                  "type": "string"
+                },
+                "branch_code": {
+                  "type": "string"
+                },
+                "operative_branch": {
+                  "type": "string"
+                },
+                "bank": {
+                  "type": "string"
+                },
+                "operative_bank": {
+                  "type": "string"
+                },
+                "branch_address": {
+                  "type": "object",
+                  "properties": {
+                    "province": {
+                      "type": "integer"
+                    },
+                    "post_code": {
+                      "type": "integer"
+                    },
+                    "country": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "region": {
+                  "type": "string"
+                },
+                "head_branch": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "health": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "integer"
+            },
+            "response_time": {
+              "type": "integer"
+            },
+            "http_status_code": {
+              "type": "integer"
+            },
+            "response_status": {
+              "type": "string"
+            },
+            "response_code": {
+              "type": "string"
+            }
+          }
+        },
+        "msg_in": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {}
+            },
+            "body": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "msg_out": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "string"
+            },
+            "body": {
+              "type": "string"
+            }
+          }
+        },
+        "journal": {
+          "type": "string"
+        },
+        "additional_data": {
+          "type": "string"
+        }
+      }
+    },
+    "outbound_calls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "srv_href": {
+            "type": "string"
+          },
+          "srv_type": {
+            "type": "string"
+          },
+          "uuaa": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "srv_id",
+    "srv_href",
+    "srv_type",
+    "uuaa",
+    "inbound_call",
+    "outbound_calls"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "srv_id": "SMC201500250",
+  "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
+  "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
+  "uuaa": "ENAX, KJIM, QZQP, ATRP...",
+  "inbound_call": {
+    "custormer_id": "ES0182099817252C",
+    "user_id": "xe01379",
+    "process_type": "id proceso contratación",
+    "process_id": "id instancia única proceso de contratación",
+    "session_id": "id Sesión",
+    "user_action_id": "id Usuario ejecutor",
+    "call_id": "id llamada",
+    "aap": "00000037",
+    "cms": {
+      "channel": 6,
+      "medium": 19,
+      "service": 105
+    },
+    "user_agent": "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405",
+    "hostname": "spnac008",
+    "instance_name": "01(clon)",
+    "caller_ip": "192.168.1.123",
+    "location": {
+      "geolocation": {
+        "lat": "37.3591307",
+        "lon": "-6.034502"
+      },
+      "branch": {
+        "branch_id": "ES01820437",
+        "branch_code": "0437",
+        "operative_branch": "0883",
+        "bank": "0182",
+        "operative_bank": "0001",
+        "branch_address": {
+          "province": 41,
+          "post_code": 28011,
+          "country": "País"
+        },
+        "region": "región",
+        "head_branch": " "
+      }
+    },
+    "health": {
+      "timestamp": 1444389041012,
+      "response_time": 25001,
+      "http_status_code": 200,
+      "response_status": "OK",
+      "response_code": "Servicios: invalidAccountParameter, invalidParameters, etc.Backend: 44725, 66884, etc (o mejor 08, 06, 12, etc.???)"
+    },
+    "msg_in": {
+      "header": {},
+      "body": {}
+    },
+    "msg_out": {
+      "header": "{}",
+      "body": "{}"
+    },
+    "journal": "{}",
+    "additional_data": "{}"
+  },
+  "outbound_calls": [
+    {
+      "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
+      "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
+      "uuaa": "ENAX, KJIM, QZQP, ATRP..."
+    }
+  ]
+}
+</code></pre></div><div class="tab-pane" id="log_structured_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>-- M.I.K.E API-- method: Post path: /log/structured description: This method is to send a new log to the box which is structured following the canonical model. message: M.I.K.E - Created OK.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 201,
+    "status_message": "M.I.K.E - Created OK."
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>-- M.I.K.E API-- method: Get path: /log/structured description: This method is to get a list of logs which are structured following the canonical model. It should be queried filtering by the one or more fields follow:</p><ul><li>filters.- The filters to use in the query. per example; "filters=field1:value1,field2:value2,etc..."</li><li>fields.- The fields to expose in the results. per example; "fields=field1,field2,field3,etc ..."</li><li>orderBy.- The sorting options to return the results ordered by a field or dimension. per example; "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc ..."</li><li>dateFrom.- The starter date in timestamp format to filter the results in the query. per example; "dateFrom=1444389041012"</li><li>dateTo.- The top date in timestamp format to filter the results in the query. per example; "dateTo=1444389041012" message: M.I.K.E - The server has not found anything matching the Request-URI. No indication is given of whether the condition is temporary or permanent.</li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 404,
+    "status_message": "M.I.K.E - The server has not found anything matching the URI given."
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>M.I.K.E - The server encountered an unexpected condition which prevented it from fulfilling the request.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 500,
+    "status_message": "The server encountered an unexpected condition which prevented it from fulfilling the request."
+  }
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="log_unstructured" class="panel-title">log/unstructured</h3></div><div class="panel-body"><div class="top-resource-description"><p>Requests for querying over the global health monitorization. It returns or write a specific kind of trace, identified by the name of the event type on the URI, &#39;unstructured&#39; means a log without a defined model.</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_log_unstructured"><span class="parent"></span>/log/unstructured</a> <span class="methods"><a href="#log_unstructured_get"><span class="badge badge_get">get</span></a> <a href="#log_unstructured_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_log_unstructured" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#log_unstructured_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get all logs.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#log_unstructured_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Put a new trace on the system</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_unstructured_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/log/unstructured</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get all logs.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_unstructured_get_request" data-toggle="tab">Request</a></li><li><a href="#log_unstructured_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_unstructured_get_request"><h3>Query Parameters</h3><ul><li><strong>filters</strong>: <em>(string - minLength: 3)</em><p>The filters to use in the query.</p><p><strong>Example</strong>:</p><pre>filters=field1:value1,field2:value2,etc...</pre></li><li><strong>fields</strong>: <em>(string - minLength: 3)</em><p>The fields to expose in the results.</p><p><strong>Example</strong>:</p><pre>fields=field1,field2,field3,etc ..</pre></li><li><strong>orderBy</strong>: <em>(string - minLength: 3)</em><p>The sorting options to return the results ordered by a field or dimension.</p><p><strong>Example</strong>:</p><pre>orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc ..</pre></li><li><strong>dateFrom</strong>: <em>required (string - minLength: 13)</em><p>The starter date in timestamp format to filter the results in the query.</p><p><strong>Example</strong>:</p><pre>dateFrom=1444389041012</pre></li><li><strong>dateTo</strong>: <em>(string - minLength: 13)</em><p>The top date in timestamp format to filter the results in the query.</p><p><strong>Example</strong>:</p><pre>dateTo=1444389041012</pre></li></ul></div><div class="tab-pane" id="log_unstructured_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>-- M.I.K.E API-- method: Get path: /log/unstructured description: This method is to get a list of logs with no structure. It should be queried filtering by the one or more fields follow:</p><ul><li>filters.- The filters to use in the query. per example; "filters=field1:value1,field2:value2,etc..."</li><li>fields.- The fields to expose in the results. per example; "fields=field1,field2,field3,etc ..."</li><li>orderBy.- The sorting options to return the results ordered by a field or dimension. per example; "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc ..."</li><li>dateFrom.- The starter date in timestamp format to filter the results in the query. per example; "dateFrom=1444389041012"</li><li>dateTo.- The top date in timestamp format to filter the results in the query. per example; "dateTo=1444389041012"</li></ul><p>message: M.I.K.E - OK.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    },
+    "response_body": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "response_status",
+    "response_body"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 200,
+    "status_message": "M.I.K.E - OK."
+  },
+  "response_body": ["aaaa","dddd"]
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>-- M.I.K.E API-- method: Get path: /log/structured description: This method is to get a list of logs which are structured following the canonical model. It should be queried filtering by the one or more fields follow:</p><ul><li>filters.- The filters to use in the query. per example; "filters=field1:value1,field2:value2,etc..."</li><li>fields.- The fields to expose in the results. per example; "fields=field1,field2,field3,etc ..."</li><li>orderBy.- The sorting options to return the results ordered by a field or dimension. per example; "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc ..."</li><li>dateFrom.- The starter date in timestamp format to filter the results in the query. per example; "dateFrom=1444389041012"</li><li>dateTo.- The top date in timestamp format to filter the results in the query. per example; "dateTo=1444389041012" message: M.I.K.E - The server has not found anything matching the Request-URI. No indication is given of whether the condition is temporary or permanent.</li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 404,
+    "status_message": "M.I.K.E - The server has not found anything matching the URI given."
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>M.I.K.E - The server encountered an unexpected condition which prevented it from fulfilling the request.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 500,
+    "status_message": "The server encountered an unexpected condition which prevented it from fulfilling the request."
+  }
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="log_unstructured_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/log/unstructured</h4></div><div class="modal-body"><div class="alert alert-info"><p>Put a new trace on the system</p></div><ul class="nav nav-tabs"><li class="active"><a href="#log_unstructured_post_request" data-toggle="tab">Request</a></li><li><a href="#log_unstructured_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="log_unstructured_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "message"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "message": "17/10/2014 18:45:03.190 fMpushqiHl2zEtkA7wDDiWq WebContainer : 1 La clave PAR.DATOS_SALIDA.DATOS.FILAS.19.COLUMNA.21.0 tiene el dato 1,58  ##Servicio: ATAESG00052XX2"
+}
+</code></pre></div><div class="tab-pane" id="log_unstructured_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>-- M.I.K.E API-- method: Post path: /log/structured description: This method is to send a new log to the box which is structured following the canonical model. message: M.I.K.E - Created OK.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 201,
+    "status_message": "M.I.K.E - Created OK."
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>-- M.I.K.E API-- method: Get path: /log/structured description: This method is to get a list of logs which are structured following the canonical model. It should be queried filtering by the one or more fields follow:</p><ul><li>filters.- The filters to use in the query. per example; "filters=field1:value1,field2:value2,etc..."</li><li>fields.- The fields to expose in the results. per example; "fields=field1,field2,field3,etc ..."</li><li>orderBy.- The sorting options to return the results ordered by a field or dimension. per example; "orderBy=field1:asc|desc,field2:asc|desc,field3:asc|desc,etc ..."</li><li>dateFrom.- The starter date in timestamp format to filter the results in the query. per example; "dateFrom=1444389041012"</li><li>dateTo.- The top date in timestamp format to filter the results in the query. per example; "dateTo=1444389041012" message: M.I.K.E - The server has not found anything matching the Request-URI. No indication is given of whether the condition is temporary or permanent.</li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 404,
+    "status_message": "M.I.K.E - The server has not found anything matching the URI given."
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>M.I.K.E - The server encountered an unexpected condition which prevented it from fulfilling the request.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "response_status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer"
+        },
+        "status_message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status_code",
+        "status_message"
+      ]
+    }
+  },
+  "required": [
+    "response_status"
+  ]
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "response_status": {
+    "status_code": 500,
+    "status_message": "The server encountered an unexpected condition which prevented it from fulfilling the request."
+  }
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#log_structured">log/structured</a></li><li><a href="#log_unstructured">log/unstructured</a></li></ul></div></div></div></div></body></html>
