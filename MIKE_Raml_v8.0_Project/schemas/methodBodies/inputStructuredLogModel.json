@@ -11,12 +11,12 @@
     "srv_type": {
       "type": "string"
     },
-    "uuaa": {
-      "type": "string"
-    },
     "inbound_call": {
       "type": "object",
       "properties": {
+        "aap": {
+          "type": "string"
+        },
         "custormer_id": {
           "type": "string"
         },
@@ -37,23 +37,6 @@
         },
         "call_id": {
           "type": "string"
-        },
-        "aap": {
-          "type": "string"
-        },
-        "cms": {
-          "type": "object",
-          "properties": {
-            "channel": {
-              "type": "integer"
-            },
-            "medium": {
-              "type": "integer"
-            },
-            "service": {
-              "type": "integer"
-            }
-          }
         },
         "user_agent": {
           "type": "string"
@@ -81,45 +64,27 @@
                 }
               }
             },
-            "branch": {
+            "operative_branch": {
               "type": "object",
               "properties": {
-                "branch_id": {
-                  "type": "string"
-                },
-                "branch_code": {
-                  "type": "string"
-                },
-                "operative_branch": {
-                  "type": "string"
-                },
-                "bank": {
-                  "type": "string"
-                },
-                "operative_bank": {
-                  "type": "string"
-                },
-                "branch_address": {
-                  "type": "object",
-                  "properties": {
-                    "province": {
-                      "type": "integer"
-                    },
-                    "post_code": {
-                      "type": "integer"
-                    },
-                    "country": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "region": {
-                  "type": "string"
-                },
-                "head_branch": {
+                "id": {
                   "type": "string"
                 }
-              }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "physical_branch": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
             }
           }
         },
@@ -132,14 +97,25 @@
             "response_time": {
               "type": "integer"
             },
-            "http_status_code": {
+            "http_status": {
               "type": "integer"
             },
-            "response_status": {
+            "app_status": {
               "type": "string"
             },
-            "response_code": {
-              "type": "string"
+            "app_error_code": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             }
           }
         },
@@ -147,12 +123,10 @@
           "type": "object",
           "properties": {
             "header": {
-              "type": "object",
-              "properties": {}
+              "type": "string"
             },
             "body": {
-              "type": "object",
-              "properties": {}
+              "type": "string"
             }
           }
         },
@@ -173,23 +147,98 @@
         "additional_data": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "aap",
+        "call_id",
+        "hostname",
+        "instance_name"
+      ]
     },
     "outbound_calls": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
+          "srv_id": {
+            "type": "string"
+          },
           "srv_href": {
             "type": "string"
           },
           "srv_type": {
             "type": "string"
           },
-          "uuaa": {
+          "call_id": {
+            "type": "string"
+          },
+          "health": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "type": "integer"
+              },
+              "response_time": {
+                "type": "integer"
+              },
+              "http_status": {
+                "type": "integer"
+              },
+              "app_status": {
+                "type": "string"
+              },
+              "app_error_code": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          },
+          "msg_in": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              }
+            }
+          },
+          "msg_out": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              }
+            }
+          },
+          "journal": {
+            "type": "string"
+          },
+          "additional_data": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "srv_id",
+          "srv_type",
+          "call_id",
+          "inbound_call",
+          "outbound_calls"
+        ]
       }
     }
   },
@@ -197,7 +246,6 @@
     "srv_id",
     "srv_href",
     "srv_type",
-    "uuaa",
     "inbound_call",
     "outbound_calls"
   ]

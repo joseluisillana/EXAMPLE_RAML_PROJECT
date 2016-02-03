@@ -14,7 +14,9 @@ documentation:
       - Non-structured Logs: Logs without model, that needs to be proccessed to turn on an useful log.
 
 schemas:
-  - InputBodyStructuredLog: !include schemas/methodBodies/structuredLog.json
+  #- InputBodyStructuredLog: !include schemas/methodBodies/structuredLog.json
+  - InputBodyStructuredLogModel: !include schemas/methodBodies/inputStructuredLogModel.json
+  - OutputBodyStructuredLogModel: !include schemas/methodBodies/outputStructuredLogModel.json
   - InputBodyUnstructuredLog: !include schemas/methodBodies/unstructuredLog.json
   - ResponseGetStructuredLog: !include schemas/responses/responseGetStructuredSchema.json
   - ResponseGetUnstructuredLog: !include schemas/responses/responseGetUnstructuredSchema.json
@@ -88,8 +90,8 @@ traits:
     description: Put a new trace on the system
     body:
         application/json:
-                          schema: InputBodyStructuredLog
-                          example: !include examples/methodBodies/structuredLogExample.json
+          schema: InputBodyStructuredLogModel
+          example: !include examples/methodBodies/inputStructuredLogModelExample.json
     responses:
           201:
               description: !include documentation/response_201.md

@@ -1,0 +1,73 @@
+{
+  "srv_id": "SMC201500250",
+  "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
+  "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
+  "inbound_call": {
+    "aap": "00000037",
+    "custormer_id": "ES0182099817252C",
+    "user_id": "xe01379",
+    "process_type": "id proceso contratación",
+    "process_id": "id instancia única proceso de contratación",
+    "session_id": "id Sesión",
+    "user_action_id": "id Usuario ejecutor",
+    "call_id": "id llamada",
+    "user_agent": "Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405",
+    "hostname": "spnac008",
+    "instance_name": "01(clon)",
+    "caller_ip": "192.168.1.123",
+    "location": {
+      "geolocation": {
+        "lat": "37.3591307",
+        "lon": "-6.034502"
+      },
+      "operative_branch": {
+        "id": "ES01820437"
+      },
+      "physical_branch": {
+        "id": "ES01820437"
+      }
+    },
+    "health": {
+      "timestamp": 1444389041012,
+      "response_time": 25001,
+      "http_status": 200,
+      "app_status": "OK",
+      "app_error_code": ["01","02","03"]
+    },
+    "msg_in": {
+      "header": "{}",
+      "body": "{}"
+    },
+    "msg_out": {
+      "header": "{}",
+      "body": "{}"
+    },
+    "journal": "{}",
+    "additional_data": "{}"
+  },
+  "outbound_calls": [
+    {
+      "srv_id": "SMC201500250",
+      "srv_href": "http://ei-arqaso.igrupobbva:7050/customers/V01/123/",
+      "srv_type": "MSRV (Multichannel Service), NFLW (Nacar Flow), APXTX (APX transaction), MFTX (Host transaction), ROU (Routine)",
+      "call_id": "id llamada",
+      "health": {
+        "timestamp": 1444389041012,
+        "response_time": 25001,
+        "http_status": 200,
+        "app_status": "OK",
+        "app_error_code": ["01","02","03"]
+      },
+      "msg_in": {
+        "header": "{}",
+        "body": "{}"
+      },
+      "msg_out": {
+        "header": "{}",
+        "body": "{}"
+      },
+      "journal": "{}",
+      "additional_data": "{}"
+    }
+  ]
+}

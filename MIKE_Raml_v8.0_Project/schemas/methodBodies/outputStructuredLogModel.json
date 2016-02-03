@@ -1,0 +1,333 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "srv_id": {
+      "type": "string"
+    },
+    "srv_href": {
+      "type": "string"
+    },
+    "srv_type": {
+      "type": "string"
+    },
+    "uuaa": {
+      "type": "string"
+    },
+    "inbound_call": {
+      "type": "object",
+      "properties": {
+        "aap": {
+          "type": "string"
+        },
+        "custormer_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "process_type": {
+          "type": "string"
+        },
+        "process_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "user_action_id": {
+          "type": "string"
+        },
+        "call_id": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "object",
+          "properties": {
+            "level_1": {
+              "type": "string"
+            },
+            "level_2": {
+              "type": "string"
+            },
+            "level_3": {
+              "type": "string"
+            }
+          }
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "instance_name": {
+          "type": "string"
+        },
+        "caller_ip": {
+          "type": "string"
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "geolocation": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "string"
+                },
+                "lon": {
+                  "type": "string"
+                }
+              }
+            },
+            "operative_branch": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "branch_code": {
+                  "type": "string"
+                }
+              }
+            },
+            "physical_branch": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "branch_code": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "health": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "integer"
+            },
+            "response_time": {
+              "type": "integer"
+            },
+            "http_status": {
+              "type": "integer"
+            },
+            "app_status": {
+              "type": "string"
+            },
+            "app_error_code": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "msg_in": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "string"
+            },
+            "body": {
+              "type": "string"
+            }
+          }
+        },
+        "msg_out": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "string"
+            },
+            "body": {
+              "type": "string"
+            }
+          }
+        },
+        "journal": {
+          "type": "string"
+        },
+        "additional_data": {
+          "type": "string"
+        }
+      }
+    },
+    "outbound_calls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "aap": {
+            "type": "string"
+          },
+          "custormer_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "process_type": {
+            "type": "string"
+          },
+          "process_id": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          },
+          "user_action_id": {
+            "type": "string"
+          },
+          "call_id": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "object",
+            "properties": {
+              "level_1": {
+                "type": "string"
+              },
+              "level_2": {
+                "type": "string"
+              },
+              "level_3": {
+                "type": "string"
+              }
+            }
+          },
+          "user_agent": {
+            "type": "string"
+          },
+          "hostname": {
+            "type": "string"
+          },
+          "instance_name": {
+            "type": "string"
+          },
+          "caller_ip": {
+            "type": "string"
+          },
+          "location": {
+            "type": "object",
+            "properties": {
+              "geolocation": {
+                "type": "object",
+                "properties": {
+                  "lat": {
+                    "type": "string"
+                  },
+                  "lon": {
+                    "type": "string"
+                  }
+                }
+              },
+              "operative_branch": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "branch_code": {
+                    "type": "string"
+                  }
+                }
+              },
+              "physical_branch": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "branch_code": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "health": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "type": "integer"
+              },
+              "response_time": {
+                "type": "integer"
+              },
+              "http_status": {
+                "type": "integer"
+              },
+              "app_status": {
+                "type": "string"
+              },
+              "app_error_code": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          },
+          "msg_in": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              }
+            }
+          },
+          "msg_out": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              }
+            }
+          },
+          "journal": {
+            "type": "string"
+          },
+          "additional_data": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "srv_id",
+    "srv_href",
+    "srv_type",
+    "uuaa",
+    "inbound_call",
+    "outbound_calls"
+  ]
+}
