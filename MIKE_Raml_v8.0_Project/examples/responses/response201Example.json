@@ -2,6 +2,5 @@
   "response_status": {
     "status_code": 201,
     "status_message": "M.I.K.E - Created OK."
-  },
-  "response_body": [{}]
+  }
 }

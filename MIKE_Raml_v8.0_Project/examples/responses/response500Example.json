@@ -2,6 +2,5 @@
   "response_status": {
     "status_code": 500,
     "status_message": "The server encountered an unexpected condition which prevented it from fulfilling the request."
-  },
-  "response_body": [{}]
+  }
 }

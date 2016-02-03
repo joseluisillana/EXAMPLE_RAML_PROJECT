@@ -235,9 +235,7 @@
         "required": [
           "srv_id",
           "srv_type",
-          "call_id",
-          "inbound_call",
-          "outbound_calls"
+          "call_id"
         ]
       }
     }
